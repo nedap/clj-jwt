@@ -1,8 +1,5 @@
 # clj-jwt
 
-[![Build Status](https://travis-ci.org/liquidz/clj-jwt.png?branch=master)](https://travis-ci.org/liquidz/clj-jwt)
-[![Dependency Status](https://www.versioneye.com/user/projects/53462a37e97a46e756000308/badge.png)](https://www.versioneye.com/user/projects/53462a37e97a46e756000308)
-
 A Clojure library for JSON Web Token(JWT) [draft-ietf-oauth-json-web-token-19](http://tools.ietf.org/html/draft-ietf-oauth-json-web-token-19)
 
 ## Supporting algorithms
@@ -16,7 +13,10 @@ A Clojure library for JSON Web Token(JWT) [draft-ietf-oauth-json-web-token-19](h
 ## Usage
 
 ### Leiningen
-[![clj-jwt](https://clojars.org/clj-jwt/latest-version.svg)](https://clojars.org/clj-jwt)
+
+```clojure
+[com.nedap.staffing-solutions/clj-jwt "0.2.0-alpha1"]
+```
 
 ### Generate
 
