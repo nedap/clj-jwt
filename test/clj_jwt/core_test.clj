@@ -100,7 +100,16 @@
     (let [key-id "the-key-id"
           signed-jwt (-> claim jwt (sign :RS256 key-id rsa-prv-key))]
       (get-in signed-jwt [:header :kid])
-      => key-id)))
+      => key-id))
+
+  (fact "signing without including a key-id does not include the `kid` key in the header."
+    (-> claim
+        jwt
+        (sign :RS256 rsa-prv-key)
+        :header
+        (contains? :kid))
+    =>
+    false))
 
 (facts "JWT verify"
   (fact "Unknown signature algorithm should be thrown exception."
