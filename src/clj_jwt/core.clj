@@ -48,7 +48,8 @@
 (defprotocol JsonWebSignature
   "Protocol for JonWebSignature"
   (set-alg [this alg] "Set algorithm name to JWS Header Parameter")
-  (sign    [this key] [this alg key] "Set signature to this token")
+  (set-key-id [this key-id] "Set Key ID to JWS Header Parameter")
+  (sign    [this key] [this alg key] [this alg key-id key] "Set signature to this token")
   (verify  [this] [this key] [this algorithm key] "Verify this token"))
 
 (extend-protocol JsonWebSignature
@@ -56,10 +57,16 @@
   (set-alg [this alg]
     (assoc-in this [:header :alg] (name alg)))
 
+  (set-key-id [this key-id]
+    (assoc-in this [:header :kid] key-id))
+
   (sign
     ([this key] (sign this DEFAULT_SIGNATURE_ALGORITHM key))
-    ([this alg key]
-     (let [this*   (set-alg this alg)
+    ([this alg key] (sign this alg nil key))
+    ([this alg key-id key]
+     (let [this*   (cond-> this
+                     alg    (set-alg alg)
+                     key-id (set-key-id key-id))
            sign-fn (get-signature-fn alg)
            data    (str (encoded-header this*) "." (encoded-claims this*))]
        (assoc this* :signature (sign-fn key data) :encoded-data data))))
