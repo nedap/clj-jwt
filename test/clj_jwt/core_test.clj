@@ -94,7 +94,13 @@
       (-> token :claims :exp) => 946868645
       (-> token :claims :nbf) => 946782245
       (-> token :claims :iat) => 946782245
-      (-> token :claims :dmy) => d)))
+      (-> token :claims :dmy) => d))
+
+  (fact "signing with key-id, should include key-id in header."
+    (let [key-id "the-key-id"
+          signed-jwt (-> claim jwt (sign :RS256 key-id rsa-prv-key))]
+      (get-in signed-jwt [:header :kid])
+      => key-id)))
 
 (facts "JWT verify"
   (fact "Unknown signature algorithm should be thrown exception."
