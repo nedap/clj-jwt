@@ -107,9 +107,10 @@
 
 ; =str->jwt
 (defn str->jwt
+  "Decode a string into a JWT"
   [jwt-string]
   (let [[header claims signature] (str/split jwt-string #"\.")]
-    (->JWT (encoded-json->map header)
-           (encoded-json->map claims)
-           (or signature "")
-           (str header "." claims))))
+    (map->JWT {:header       (encoded-json->map header)
+               :claims       (encoded-json->map claims)
+               :signature    (or signature "")
+               :encoded-data (str header "." claims)})))
