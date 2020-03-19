@@ -14,7 +14,7 @@
                  [crypto-equality "1.0.0"]
                  [clj-time "0.11.0"]]
   :plugins [[lein-midje "3.1.3"]]
-  :profiles {:dev {:dependencies [[midje "1.7.0" :exclusions [org.clojure/clojure]]]}
+  :profiles {:dev {:dependencies [[midje "1.9.9" :exclusions [org.clojure/clojure]]]}
              :ci  {:pedantic?    :abort
                    :jvm-opts     ["-Dclojure.main.report=stderr"]
                    :global-vars  {*assert* true}  ;; `ci.release-workflow` relies on runtime assertions
