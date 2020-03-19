@@ -15,7 +15,7 @@ A Clojure library for JSON Web Token(JWT) [draft-ietf-oauth-json-web-token-19](h
 ### Leiningen
 
 ```clojure
-[com.nedap.staffing-solutions/clj-jwt "0.2.0-alpha2"]
+[com.nedap.staffing-solutions/clj-jwt "0.2.0-alpha3"]
 ```
 
 ### Generate
