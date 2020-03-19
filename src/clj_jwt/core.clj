@@ -5,12 +5,26 @@
     [clj-jwt.intdate     :refer [joda-time->intdate]]
     [clj-jwt.json-key-fn :refer [write-key read-key]]
     [clojure.data.json   :as json]
-    [clojure.string      :as str]))
+    [clojure.string      :as str])
+  (:import
+   (java.util UUID)))
 
 (def ^:private DEFAULT_SIGNATURE_ALGORITHM :HS256)
+
+(defn write-json-val [key value]
+  (if (= key :uuid)
+    (-> ^UUID value .toString)
+    value))
+
+(defn read-json-value [key value]
+  (if (= :uuid key)
+    (UUID/fromString value)
+    value))
+
 (def ^:private map->encoded-json (comp url-safe-encode-str
-                                       #(json/write-str % :key-fn write-key)))
-(def ^:private encoded-json->map (comp #(json/read-str % :key-fn read-key)
+                                       #(json/write-str % :key-fn write-key :value-fn write-json-val)))
+
+(def ^:private encoded-json->map (comp #(json/read-str % :key-fn read-key :value-fn read-json-value)
                                        url-safe-decode-str))
 (defn- update-map [m k f] (if (contains? m k) (update-in m [k] f) m))
 
