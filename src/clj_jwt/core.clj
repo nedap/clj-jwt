@@ -12,7 +12,8 @@
 (def ^:private DEFAULT_SIGNATURE_ALGORITHM :HS256)
 
 (defn write-json-val [key value]
-  (if (= key :uuid)
+  (if (and (= :uuid key)
+           (instance? UUID value))
     (-> ^UUID value .toString)
     value))
 
