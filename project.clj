@@ -12,7 +12,7 @@
                  [org.clojure/data.codec "0.1.0"]
                  [org.bouncycastle/bcpkix-jdk15on "1.52"]
                  [crypto-equality "1.0.0"]
-                 [clj-time "0.11.0"]]
+                 [clj-time "0.15.2"]]
   :plugins [[lein-midje "3.1.3"]]
   :profiles {:dev {:dependencies [[midje "1.9.9" :exclusions [org.clojure/clojure]]]}
              :ci  {:pedantic?    :abort
