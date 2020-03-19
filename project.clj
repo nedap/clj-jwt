@@ -1,5 +1,5 @@
 ;; Please don't bump the library version by hand - use ci.release-workflow instead.
-(defproject com.nedap.staffing-solutions/clj-jwt "0.2.0-alpha3"
+(defproject com.nedap.staffing-solutions/clj-jwt "0.2.0-alpha4"
   :description "Clojure library for JSON Web Token(JWT)"
   :url "https://github.com/nedap/clj-jwt"
   :license {:name "Eclipse Public License"
